@@ -225,19 +225,22 @@ print()
 print()
 print("-------------------------------------------------------------------------------------------------------------------")
 
-def top_movie_imdb_genre(n,genre):
-    pipe = [
-        {"$unwind": "$genres"},
-
-        {"$group" : {"_id" : "$genres","max_imdb" : {"$sum" : 1}}},
-        {"$sort": {"count": -1}},
-        {"$limit": n },
-        {"$project" : {"genre" : "$genres","count" : "$count"}}
-    ]
-    pprint(list(movies.aggregate(pipe)))
-
-
-top_n_actors_with_max_movies_in_year(10,"Crime")
+def topNMoviesForAGenre(self,N):
+        pipe=[
+            {"$unwind":"$genres"},
+            {"$group":{"_id":"$genres"}}
+        ]
+        for i in list(moviesCollection.aggregate(pipe)):
+            genre=i['_id']
+            print("Genre: "+genre)
+            pipe=[
+                {"$match":{"genres":genre}},
+                {"$sort":{"imdb.rating":-1}},
+                {"$match":{"imdb.rating":{"$ne":""}}},
+                {"$project":{"_id":0,"title":1,"rating":"$imdb.rating"}},
+                {"$limit":N}
+            ] 
+            pprint(list(moviesCollection.aggregate(pipe)))
 
 
 
