@@ -32,6 +32,6 @@ def top10theatersNear(cod):
                         "coordinates": cod
                     }}
             }
-        }).limit(10)))
+    },{"theaterId" : 1 ,"location.geo.coordinates" : 1}).limit(10)))
 
 top10theatersNear([-111.89966,33.430729])
