@@ -16,13 +16,6 @@ def Find_10_cities_top_theaters():
 Find_10_cities_top_theaters()
 
 
-
-
-print()
-print()
-print("-------------------------------------------------------------------------------------------------------------------")
-
-
 def top10theatersNear(cod):
     theaters.create_index([("location.geo", "2dsphere")])
     pprint(list(theaters.find(
