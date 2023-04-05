@@ -59,19 +59,18 @@ print()
 print()
 print("-------------------------------------------------------------------------------------------------------------------")
 
-def Find_top_N_movies_with_the_highest_tomato_rating(n):
-    pipe = [
-        {"$match": {"tomatoes.viewer.rating": {"$ne": ""}}},
+def find_top_movies_by_title_pattern(pattern, limit=10):
+    pipeline = [
+        {"$match": {"title": {"$regex": pattern}}},
         {"$sort": {"tomatoes.viewer.rating": -1}},
-        {"$limit": n },
-        {"$project" : {"id" : "$_id","title" : "$title", "tomatoes-rating" : "$tomatoes.viewer.rating"}}
-
+        {"$limit": limit},
+        {"$project": {"_id": 0,"title": 1,"imdb.rating": 1, "viewer_rating" : "$tomatoes.viewer.rating"}}
     ]
-    pprint(list(movies.aggregate(pipe)))
+    results = db.movies.aggregate(pipeline)
+    for doc in results:
+        print(doc)
 
-
-Find_top_N_movies_with_the_highest_tomato_rating(10)
-
+find_top_movies_by_title_pattern("The")
 
 print()
 print()

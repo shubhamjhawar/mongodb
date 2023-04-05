@@ -6,6 +6,10 @@ db = client['as']
 comments = db['comments']
 
 
+print()
+print()
+print("-------------------------------------------------------------------------------------------------------------------")
+
 
 #1 Find top 10 users who made the maximum number of comments
 def top_10_users():
@@ -31,6 +35,10 @@ def top_10_users():
 
 top_10_users()
 
+
+print()
+print()
+print("-------------------------------------------------------------------------------------------------------------------")
 
 #2
 '''
@@ -64,6 +72,10 @@ def top_10_with_comments():
 
 top_10_with_comments()
 
+
+print()
+print()
+print("-------------------------------------------------------------------------------------------------------------------")
 #3
 #Given a year find the total number of comments created each month in that year
 # Define the pipeline stages as a list of dictionaries
