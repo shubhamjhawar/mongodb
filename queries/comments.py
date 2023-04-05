@@ -34,7 +34,8 @@ def top_10_users():
         print(doc)
 
 top_10_users()
-
+print('''
+    Top 10 users with most comments''')
 
 print()
 print()
@@ -61,6 +62,7 @@ def top_10_with_comments():
         {
             "$limit": 10
         }
+
     ]
     print('''
     Top 10 movies with most comments''')
@@ -92,8 +94,9 @@ def monthWiseComment(year):
     results2 = comments.aggregate(pipeline3)
     for doc in results2:
         print(doc)
-
-monthWiseComment(2016)
+print('''
+Given a year find the total number of comments created each month in that year''')
+monthWiseComment(1999)
 
 
 

@@ -13,6 +13,9 @@ def Find_10_cities_top_theaters():
         {"$project" : {"city" : "$location.address.city","count" : "$cnt"}},
     ]
     pprint(list(theaters.aggregate(pipe)))
+print('''
+Find_10_cities_top_theaters in this
+''' )
 
 Find_10_cities_top_theaters()
 
@@ -34,4 +37,10 @@ def top10theatersNear(cod):
             }
     },{"theaterId" : 1 ,"location.geo.coordinates" : 1}).limit(10)))
 
+print('''
+top10theatersNear the location  [-111.89966,33.430729]
+''')
 top10theatersNear([-111.89966,33.430729])
+
+
+

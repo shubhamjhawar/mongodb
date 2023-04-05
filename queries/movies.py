@@ -17,7 +17,9 @@ def Find_top_N_movies_with_the_highest_IMDB_rating(n):
     ]
     pprint(list(movies.aggregate(pipe)))
 
-
+print('''Printing the title and IMDB rating for each movie of top N movies
+''')
+print()
 Find_top_N_movies_with_the_highest_IMDB_rating(10)
 
 print()
@@ -36,7 +38,10 @@ def find_top_n_movies_with_highest_imdb_rating_in_year(n,year):
     ]
     pprint(list(movies.aggregate(pipe)))
 
-find_top_n_movies_with_highest_imdb_rating_in_year(3,2002)
+print('''Printing the title and IMDB rating for each movie of top N movies in year 2002
+''')
+print()
+find_top_n_movies_with_highest_imdb_rating_in_year(10,2002)
 
 print()
 print()
@@ -44,14 +49,16 @@ print("-------------------------------------------------------------------------
 
 def find_top_n_movies_with_highest_imdb_rating_in_votes_greater_than_1000(n):
     pipe = [
-        {"$match": {"$and" : [{"imdb.rating": {"$ne": ""}},{"year" : 2002 },{"imdb.votes" :{"$gte" : 1000 }}  ]}},
+        {"$match": {"$and" : [{"imdb.rating": {"$ne": ""}},{"imdb.votes" :{"$gte" : 1000 }}  ]}},
         {"$sort": {"imdb.rating": -1}},
         {"$limit": n },
         {"$project": {"id": "$_id", "title": "$title", "imdb-rating": "$imdb.rating","imdb-votes": "$imdb.votes" }}
 
     ]
     pprint(list(movies.aggregate(pipe)))
-
+print('''Printing the title and IMDB rating with votes greater than 1000
+''')
+print()
 find_top_n_movies_with_highest_imdb_rating_in_votes_greater_than_1000(3)
 
 
@@ -69,7 +76,9 @@ def find_top_movies_by_title_pattern(pattern, limit=10):
     results = db.movies.aggregate(pipeline)
     for doc in results:
         print(doc)
-
+print('''
+find_top_movies_by_title_pattern using regex''')
+print()
 find_top_movies_by_title_pattern("The")
 
 print()
@@ -100,6 +109,9 @@ def find_top_N_directors():
 
     pprint(list(movies.aggregate(pipeline2)))
 
+print('''
+find_top_N_directors with most number of movies''')
+print()
 find_top_N_directors()
 
 
@@ -132,6 +144,10 @@ def find_top_N_directors_in_year(year):
 
     pprint(list(movies.aggregate(pipeline2)))
 
+print('''
+find_top_N_directors_in_year that is year of 2002
+''')
+print()
 find_top_N_directors_in_year(2002)
 
 
@@ -163,6 +179,10 @@ def find_top_N_directors_in_genre(genre):
 
     pprint(list(movies.aggregate(pipeline2)))
 
+print('''
+find_top_N_directors_in_year that is genre that is crime
+''')
+print()
 find_top_N_directors_in_genre("Crime")
 
 print()
@@ -179,6 +199,9 @@ def top_n_actors_with_max_movies(n):
     pprint(list(movies.aggregate(pipe)))
 
 
+print(''''
+top_n_actors_with_max_movies in this :''')
+print()
 top_n_actors_with_max_movies(10)
 
 print()
@@ -195,7 +218,9 @@ def top_n_actors_with_max_movies_in_year(n,year):
     ]
     pprint(list(movies.aggregate(pipe)))
 
-
+print(''''
+top_n_actors_with_max_movies in this : 2002''')
+print()
 top_n_actors_with_max_movies_in_year(10,2002)
 
 
@@ -203,7 +228,7 @@ print()
 print()
 print("-------------------------------------------------------------------------------------------------------------------")
 
-def top_n_actors_with_max_movies_in_year(n,genre):
+def top_n_actors_with_max_movies_in_year_genre(n,genre):
     pipe = [
         {"$unwind": "$genres"},
         {"$match": {"genres": genre}},
@@ -215,12 +240,12 @@ def top_n_actors_with_max_movies_in_year(n,genre):
     ]
     pprint(list(movies.aggregate(pipe)))
 
-
-top_n_actors_with_max_movies_in_year(10,"Crime")
-
-
-
+print(''''
+Top_n_actors_with_max_movies in the genre :''')
 print()
+top_n_actors_with_max_movies_in_year_genre(10,"Crime")
+
+
 print()
 print("-------------------------------------------------------------------------------------------------------------------")
 
@@ -240,7 +265,8 @@ def topNMoviesForAGenre(N):
                 {"$limit":N}
             ] 
             pprint(list(movies.aggregate(pipe)))
-
+print(''''
+topNMoviesForAGenre : ''')
 topNMoviesForAGenre(10)
 
 
