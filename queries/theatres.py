@@ -5,15 +5,20 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client['as']
 theaters = db['theatres']
 
-# def Find_10_cities_top_theaters():
-#     pipe = [
-#         {"$group": {"_id" : "$location.address.city" , "cnt":{"$sum":1}}},
-#         {"$sort": {"cnt": -1}},
-#         {"$limit": 10 },
-#     ]
-#     pprint(list(theaters.aggregate(pipe)))
-#
-# Find_10_cities_top_theaters()
+def Find_10_cities_top_theaters():
+    pipe = [
+        {"$group": {"_id" : "$location.address.city" , "cnt":{"$sum":1}}},
+        {"$sort": {"cnt": -1}},
+        {"$limit": 10 },
+        {"$project" : {"city" : "$location.address.city","count" : "$cnt"}},
+    ]
+    pprint(list(theaters.aggregate(pipe)))
+
+Find_10_cities_top_theaters()
+
+print()
+print()
+print("-------------------------------------------------------------------------------------------------------------------")
 
 
 def top10theatersNear(cod):
