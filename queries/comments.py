@@ -31,9 +31,6 @@ def top_10_users():
 
 top_10_users()
 
-print()
-print()
-print("-----------------------------------------------------------------------------------------------------------")
 
 #2
 '''
@@ -67,13 +64,10 @@ def top_10_with_comments():
 
 top_10_with_comments()
 
-print()
-print()
-print("-----------------------------------------------------------------------------------------------------------")
-
 #3
 #Given a year find the total number of comments created each month in that year
 # Define the pipeline stages as a list of dictionaries
+
 def monthWiseComment(year):
     pipeline3 = [
         {"$project": {"year": {"$year": "$date"}, "month": {"$month": "$date"}}},

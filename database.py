@@ -49,3 +49,4 @@ def insert_theatre(theatre):
 # insert new user into the users collection
 def insert_user(user):
     db.users.insert_one(user)
+
