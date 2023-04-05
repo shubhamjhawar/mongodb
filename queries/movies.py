@@ -225,12 +225,12 @@ print()
 print()
 print("-------------------------------------------------------------------------------------------------------------------")
 
-def topNMoviesForAGenre(self,N):
+def topNMoviesForAGenre(N):
         pipe=[
             {"$unwind":"$genres"},
             {"$group":{"_id":"$genres"}}
         ]
-        for i in list(moviesCollection.aggregate(pipe)):
+        for i in list(movies.aggregate(pipe)):
             genre=i['_id']
             print("Genre: "+genre)
             pipe=[
@@ -240,9 +240,9 @@ def topNMoviesForAGenre(self,N):
                 {"$project":{"_id":0,"title":1,"rating":"$imdb.rating"}},
                 {"$limit":N}
             ] 
-            pprint(list(moviesCollection.aggregate(pipe)))
+            pprint(list(movies.aggregate(pipe)))
 
-
+topNMoviesForAGenre(10)
 
 
 
